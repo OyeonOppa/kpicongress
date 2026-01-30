@@ -7,64 +7,93 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Language Toggle -->
-    <div class="lang-toggle">
-        <button onclick="switchLanguage('th')" id="btn-th" class="active">ไทย</button>
-        <button onclick="switchLanguage('en')" id="btn-en">English</button>
-    </div>
+<!-- Top Bar (Logo + Title + Nav + Language) -->
+<header class="topbar" id="topbar">
+  <div class="container topbar-inner">
+    <!-- Left: Brand -->
+    <a href="index.html" class="brand">
+      <img src="https://placehold.co/90x90/26513C/C6A55F?text=KPI" alt="KPI Logo" class="brand-logo">
+      <div class="brand-text">
+        <div class="brand-title lang-th">งานประชุมวิชาการสถาบันพระปกเกล้า</div>
+        <div class="brand-title lang-en" style="display:none;">KPI Congress 2026</div>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <img src="https://placehold.co/90x90/26513C/C6A55F?text=KPI" alt="KPI Logo" class="logo">
-                <div class="header-text">
-                    <h1 class="lang-th">งานประชุมวิชาการประจำปี</h1>
-                    <h1 class="lang-en" style="display: none;">Annual Academic Conference</h1>
-                    <p class="lang-th">สถาบันพระปกเกล้า</p>
-                    <p class="lang-en" style="display: none;">King Prajadhipok's Institute</p>
-                </div>
-            </div>
-        </div>
-    </header>
+        <div class="brand-sub lang-th">สถาบันพระปกเกล้า</div>
+        <div class="brand-sub lang-en" style="display:none;">King Prajadhipok's Institute</div>
+      </div>
+    </a>
 
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="container">
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active lang-th">หน้าแรก</a><a href="index.html" class="active lang-en" style="display: none;">Home</a></li>
-                <li><a href="register.html" class="lang-th">ลงทะเบียน</a><a href="register.html" class="lang-en" style="display: none;">Register</a></li>
-                <li><a href="schedule.html" class="lang-th">กำหนดการ</a><a href="schedule.html" class="lang-en" style="display: none;">Schedule</a></li>
-                <li><a href="speakers.html" class="lang-th">วิทยากร</a><a href="speakers.html" class="lang-en" style="display: none;">Speakers</a></li>
-                <li><a href="#contact" class="lang-th">ติดต่อเรา</a><a href="#contact" class="lang-en" style="display: none;">Contact</a></li>
-            </ul>
-        </div>
+    <!-- Center/Right: Nav -->
+    <nav class="topnav" aria-label="Primary">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html" class="active lang-th">หน้าแรก</a>
+          <a href="index.html" class="active lang-en" style="display:none;">Home</a>
+        </li>
+        <li>
+          <a href="register.html" class="lang-th">ลงทะเบียน</a>
+          <a href="register.html" class="lang-en" style="display:none;">Register</a>
+        </li>
+        <li>
+          <a href="schedule.html" class="lang-th">กำหนดการ</a>
+          <a href="schedule.html" class="lang-en" style="display:none;">Schedule</a>
+        </li>
+        <li>
+          <a href="speakers.html" class="lang-th">วิทยากร</a>
+          <a href="speakers.html" class="lang-en" style="display:none;">Speakers</a>
+        </li>
+        <li>
+          <a href="#contact" class="lang-th">ติดต่อเรา</a>
+          <a href="#contact" class="lang-en" style="display:none;">Contact</a>
+        </li>
+      </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="KPI Congress 2026">
-            <div class="hero-overlay"></div>
+    <!-- Right: Language Toggle -->
+    <div class="lang-toggle" role="group" aria-label="Language toggle">
+      <button type="button" onclick="switchLanguage('th')" id="btn-th" class="active">ไทย</button>
+      <button type="button" onclick="switchLanguage('en')" id="btn-en">English</button>
+    </div>
+  </div>
+</header>
+
+
+<!-- Hero Section -->
+<section class="hero">
+  <img
+    class="hero-bg"
+    src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    alt="KPI Congress 2026"
+    loading="eager"
+    decoding="async"
+  />
+
+  <!-- overlay มืด -->
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <!-- โทนสีแบรนด์ (ให้มิติสวยขึ้น) -->
+  <div class="hero-tint" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-text">
+        <h2 class="lang-th">งานประชุมวิชาการสถาบันพระปกเกล้า</h2>
+        <h2 class="lang-en" style="display:none;">KPI Congress 2026</h2>
+
+        <h3 class="lang-th">ประชาธิปไตยกับการพัฒนาที่ยั่งยืน</h3>
+        <h3 class="lang-en" style="display:none;">Democracy and Sustainable Development</h3>
+
+        <div class="hero-info">
+          <span class="lang-th">📅 15-16 มีนาคม 2569</span>
+          <span class="lang-en" style="display:none;">📅 March 15-16, 2026</span>
+          <span class="separator">|</span>
+          <span class="lang-th">📍 สถาบันพระปกเกล้า</span>
+          <span class="lang-en" style="display:none;">📍 King Prajadhipok's Institute</span>
         </div>
-        <div class="hero-content">
-            <div class="container">
-                <div class="hero-text">
-                    <h2 class="lang-th">งานประชุมวิชาการสถาบันพระปกเกล้า</h2>
-                    <h2 class="lang-en" style="display: none;">KPI Congress 2026</h2>
-                    <h3 class="lang-th">ประชาธิปไตยกับการพัฒนาที่ยั่งยืน</h3>
-                    <h3 class="lang-en" style="display: none;">Democracy and Sustainable Development</h3>
-                    <div class="hero-info">
-                        <span class="lang-th">📅 15-16 มีนาคม 2569</span>
-                        <span class="lang-en" style="display: none;">📅 March 15-16, 2026</span>
-                        <span class="separator">|</span>
-                        <span class="lang-th">📍 สถาบันพระปกเกล้า</span>
-                        <span class="lang-en" style="display: none;">📍 King Prajadhipok's Institute</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- Introduction Section -->
     <section class="intro-section">

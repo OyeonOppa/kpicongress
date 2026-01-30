@@ -21,20 +21,14 @@ body {
 }
 
 /* Language Toggle */
-.lang-toggle {
-    position: fixed;
-    top: 25px;
-    right: 30px;
-    z-index: 1000;
-    background: white;
-    border-radius: 30px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    border: 1px solid #e0e0e0;
+.lang-toggle{
+  display: flex;
+  align-items: center;
+  height: 40px;   /* ล็อกความสูง */
 }
 
 .lang-toggle button {
-    padding: 10px 24px;
+    padding: 0px 14px;
     border: none;
     background: white;
     color: #666;
@@ -147,96 +141,141 @@ nav {
 
 /* Hero Section */
 .hero {
-    position: relative;
-    height: 600px;
-    overflow: hidden;
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+  background: #000;
 }
 
-.hero-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+/* Background image (Layer 0) */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+
+  /* ปรับโทนภาพนิดให้ตัวอักษรอ่านง่ายขึ้น */
+  filter: saturate(1.05) contrast(1.05);
 }
 
-.hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
+/* Dark overlay (Layer 1) */
 .hero-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  /* แทน rgba ดำทึบด้วย gradient ที่ดูมีมิติ */
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.70) 100%
+  );
 }
 
+/* Brand tint (Layer 2) */
+.hero-tint {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  /* โทนสีน้ำเงิน-ทอง (ปรับให้เข้ากับ KPI) */
+  background: linear-gradient(
+    135deg,
+    rgba(0, 52, 120, 0.22) 0%,
+    rgba(198, 165, 95, 0.16) 100%
+  );
+  opacity: 0.9;
+}
+
+/* เพิ่ม vignette เบา ๆ ให้โฟกัสเข้ากลาง */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(0, 0, 0, 0.00) 0%,
+    rgba(0, 0, 0, 0.35) 65%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* Content (Layer 3) */
 .hero-content {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Text block */
 .hero-text {
-    color: white;
-    max-width: 800px;
-    text-align: center;
+  color: #fff;
+  max-width: 900px;
+  text-align: center;
+
+  /* ทำให้ตัวอักษรดู “ลอย” จากภาพ */
+  padding: 2rem 1.5rem;
 }
 
-.year-badge {
-    display: inline-block;
-    background: transparent;
-    border: 3px solid #C6A55F;
-    color: #C6A55F;
-    padding: 10px 28px;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 25px;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8),
-                 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
+/* h2 */
 .hero-text h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
-    font-weight: 400;
-    opacity: 0.95;
-    letter-spacing: 0.5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8),
-                 0 0 20px rgba(0, 0, 0, 0.5);
+  font-size: 22px;
+  margin-bottom: 14px;
+  font-weight: 500;
+  opacity: 0.95;
+  letter-spacing: 0.4px;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.75);
 }
 
+/* h3 (หัวข้อหลัก) */
 .hero-text h3 {
-    font-size: 52px;
-    margin-bottom: 30px;
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.5px;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9),
-                 0 2px 8px rgba(0, 0, 0, 0.8),
-                 0 0 30px rgba(0, 0, 0, 0.6);
+  font-size: 52px;
+  margin-bottom: 28px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.7px;
+  text-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.85),
+    0 2px 10px rgba(0, 0, 0, 0.70);
 }
 
+/* info row */
 .hero-info {
-    font-size: 17px;
-    font-weight: 500;
-    opacity: 0.95;
-    letter-spacing: 0.5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8),
-                 0 0 20px rgba(0, 0, 0, 0.5);
+  font-size: 17px;
+  font-weight: 600;
+  opacity: 0.95;
+  letter-spacing: 0.3px;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.75);
+
+  /* ทำให้อ่านง่ายขึ้นบนมือถือ */
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero-info .separator {
-    margin: 0 15px;
-    opacity: 0.5;
+  margin: 0 12px;
+  opacity: 0.55;
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero { height: 520px; }
+  .hero-text h3 { font-size: 38px; }
+  .hero-text h2 { font-size: 18px; }
+  .hero-info { font-size: 15px; }
+}
+
 
 /* Sections */
 section {
@@ -716,3 +755,133 @@ body {
         opacity: 1;
     }
 }
+
+/* Topbar */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.topbar-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+/* Brand */
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  min-width: 260px;
+}
+
+.brand-logo{
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.brand-title{
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.brand-sub{
+  font-weight: 500;
+  font-size: 13px;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+/* Nav */
+.topnav{
+  margin-left: auto;
+  margin-right: 32px;   /* เว้นที่พอดีให้ปุ่มภาษา */
+  display: flex;
+  align-items: center;
+}
+
+.topnav .nav-menu{
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.topnav .nav-menu a{
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 10px;
+  border-radius: 10px;
+  transition: background .2s ease, color .2s ease;
+}
+
+.topnav .nav-menu a:hover{
+  background: rgba(198,165,95,0.14);
+}
+
+.topnav .nav-menu a.active{
+  background: rgba(38,81,60,0.10);
+  color: #26513C;
+}
+
+/* Language toggle */
+.lang-toggle{
+  display: inline-flex;
+  background: rgba(0,0,0,0.05);
+  padding: 4px;
+  border-radius: 999px;
+  gap: 6px;
+}
+
+.lang-toggle button{
+  border: 0;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lang-toggle button.active{
+  background: #26513C;
+  color: #C6A55F;
+}
+
+/* Responsive: collapse text, allow wrap */
+@media (max-width: 980px){
+  .brand-text{
+    display: none; /* บนจอเล็ก ซ่อนชื่อยาวๆ ลดความแน่น */
+  }
+}
+
+@media (max-width: 768px){
+.topbar-inner{
+  display: flex;
+  align-items: center;   /* สำคัญ */
+  gap: 40px;
+}
+
+  .topnav .nav-menu{
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+}
+
+
