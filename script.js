@@ -1,43 +1,62 @@
-// Language switching functionality
+// Language switching
 let currentLanguage = 'th';
 
 function switchLanguage(lang) {
     currentLanguage = lang;
     
-    // Update button states
-    document.getElementById('btn-th').classList.remove('active');
-    document.getElementById('btn-en').classList.remove('active');
-    document.getElementById('btn-' + lang).classList.add('active');
+    document.getElementById('btn-th').classList.toggle('active', lang === 'th');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     
-    // Hide all language elements
-    const allLangElements = document.querySelectorAll('.lang-th, .lang-en');
-    allLangElements.forEach(element => {
+    document.querySelectorAll('.lang-th, .lang-en').forEach(element => {
         element.style.display = 'none';
     });
     
-    // Show selected language elements
-    const selectedLangElements = document.querySelectorAll('.lang-' + lang);
-    selectedLangElements.forEach(element => {
+    document.querySelectorAll('.lang-' + lang).forEach(element => {
         element.style.display = '';
     });
     
-    // Update HTML lang attribute
     document.documentElement.lang = lang;
-    
-    // Save preference to localStorage
     localStorage.setItem('preferredLanguage', lang);
 }
 
-// Load saved language preference on page load
+// Load saved language
 document.addEventListener('DOMContentLoaded', function() {
-    const savedLanguage = localStorage.getItem('preferredLanguage');
-    if (savedLanguage) {
-        switchLanguage(savedLanguage);
+    const savedLanguage = localStorage.getItem('preferredLanguage') || 'th';
+    switchLanguage(savedLanguage);
+    
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const topnav = document.getElementById('topnav');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const body = document.body;
+    
+    function toggleMenu() {
+        const isOpen = topnav.classList.toggle('open');
+        menuBtn.classList.toggle('open');
+        mobileOverlay.classList.toggle('show');
+        body.classList.toggle('menu-open');
+        menuBtn.setAttribute('aria-expanded', isOpen);
     }
     
-    // Smooth scroll for navigation links
-    const navLinks = document.querySelectorAll('a[href^="#"]');
-    navLinks.forEach(link => {
+    if (menuBtn) {
+        menuBtn.addEventListener('click', toggleMenu);
+    }
+    
+    if (mobileOverlay) {
+        mobileOverlay.addEventListener('click', toggleMenu);
+    }
+    
+    // Close menu when clicking nav links
+    document.querySelectorAll('.topnav .nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (topnav.classList.contains('open')) {
+                toggleMenu();
+            }
+        });
+    });
+    
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
@@ -50,115 +69,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Add active state to navigation on scroll
-    const sections = document.querySelectorAll('section[id]');
-    const navItems = document.querySelectorAll('.nav-menu a');
-    
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= sectionTop - 100) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === '#' + current) {
-                item.classList.add('active');
-            }
-        });
-    });
-    
-    // Form submission handler
-    const contactForm = document.querySelector('.contact-form form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const message = currentLanguage === 'th' 
-                ? 'ขอบคุณสำหรับข้อความของคุณ เราจะติดต่อกลับโดยเร็วที่สุด' 
-                : 'Thank you for your message. We will contact you soon.';
-            alert(message);
-            this.reset();
-        });
-    }
-    
-    // Add animation on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe all sections
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(30px)';
-        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(section);
-    });
 });
-
-// Navbar scroll effect
-let lastScroll = 0;
-const navbar = document.getElementById('navbar');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll <= 0) {
-        navbar.classList.remove('scroll-up');
-        return;
-    }
-    
-    if (currentScroll > lastScroll && !navbar.classList.contains('scroll-down')) {
-        // Scrolling down
-        navbar.classList.remove('scroll-up');
-        navbar.classList.add('scroll-down');
-    } else if (currentScroll < lastScroll && navbar.classList.contains('scroll-down')) {
-        // Scrolling up
-        navbar.classList.remove('scroll-down');
-        navbar.classList.add('scroll-up');
-    }
-    
-    lastScroll = currentScroll;
-});
-
-// Add loading animation
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-// Utility function for future enhancements
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// Mobile menu toggle (for future responsive menu implementation)
-function toggleMobileMenu() {
-    const navMenu = document.querySelector('.nav-menu');
-    navMenu.classList.toggle('active');
-}
-
-// Console message
-console.log('KPI Academic Conference Website');
-console.log('สถาบันพระปกเกล้า | King Prajadhipok\'s Institute');
-console.log('Developed with ❤️ for democratic education');

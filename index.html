@@ -10,7 +10,7 @@
 <!-- Top Bar (Logo + Title + Nav + Language) -->
 <header class="topbar" id="topbar">
   <div class="container topbar-inner">
-    <!-- Left: Brand -->
+    <!-- Brand -->
     <a href="index.html" class="brand">
       <img src="https://placehold.co/90x90/26513C/C6A55F?text=KPI" alt="KPI Logo" class="brand-logo">
       <div class="brand-text">
@@ -22,8 +22,10 @@
       </div>
     </a>
 
-    <!-- Center/Right: Nav -->
-    <nav class="topnav" aria-label="Primary">
+
+
+    <!-- Nav -->
+    <nav class="topnav" id="topnav" aria-label="Primary">
       <ul class="nav-menu">
         <li>
           <a href="index.html" class="active lang-th">หน้าแรก</a>
@@ -48,13 +50,22 @@
       </ul>
     </nav>
 
-    <!-- Right: Language Toggle -->
+    <!-- Language Toggle -->
     <div class="lang-toggle" role="group" aria-label="Language toggle">
       <button type="button" onclick="switchLanguage('th')" id="btn-th" class="active">ไทย</button>
       <button type="button" onclick="switchLanguage('en')" id="btn-en">English</button>
     </div>
+
+        <!-- Hamburger (Mobile) -->
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<!-- เพิ่มหลัง </header> -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
 
 
 <!-- Hero Section -->
